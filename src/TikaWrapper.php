@@ -18,7 +18,7 @@ class TikaWrapper {
         $tikaPath = __DIR__ . "/../vendor/";
         $shellCommand = 'java -jar tika-app-1.14.jar ' . $option . ' "' . $file->getRealPath() . '"';
 
-        $process = new Process($shellCommand);
+        $process = Process::fromShellCommandline($shellCommand);
         $process->setWorkingDirectory($tikaPath);
         $process->run();
 
@@ -34,7 +34,35 @@ class TikaWrapper {
      * @return int
      */
     public static function getWordCount($fileName){
-        return str_word_count(self::getText($fileName));
+        $text = self::getText($fileName);
+
+        return count(
+            preg_split('#[\s,]+#', trim($text))
+        );
+    }
+    
+    /**
+     * @param string $fileName
+     * @return int|null
+     */
+    public static function getPageCount($fileName)
+    {
+        $metaData = self::getMetaData($fileName);
+
+        $metaData = explode("\n", $metaData);
+
+        $arr = [];
+        foreach ($metaData as $data) {
+            $el = explode(':', $data);
+
+            if ($el[0]) {
+                $arr[trim($el[0])] = trim($el[1] ?? '');
+            }
+        }
+
+        return $arr['Page-Count']
+            ? (int) $arr['Page-Count']
+            : null;
     }
 
     /**
