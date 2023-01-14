@@ -15,13 +15,19 @@ See http://tika.apache.org/1.1/formats.html for details.
 
 Install with composer
 ------------------------
-Add the package dependency `enzim/tika-wrapper` in your composer.json 
+Add the package dependency in your composer.json 
 
 ```json
     {
         "require": {
-            "ninoskopac/php-tika-wrapper": "~1.0" 
-        }   
+            "alexander-logachev/phptikawrapper": "dev-master", 
+        },
+        "repositories": [
+            {
+                "type": "vcs",
+                "url": "https://github.com/Alexander-Logachev/PhpTikaWrapper.git"
+            }
+        ],
     }
 ```
 
