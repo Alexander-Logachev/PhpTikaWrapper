@@ -48,7 +48,7 @@ Example installation/usage
 See example/ (more docs to come soon) for an example:
 
 ```bash
-    git clone git@github.com:pierroweb/PhpTikaWrapper.git
+    git@github.com:Alexander-Logachev/PhpTikaWrapper.git
     cd PhpTikaWrapper
     
     cd example/with-composer
